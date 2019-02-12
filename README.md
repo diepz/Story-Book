@@ -14,5 +14,4 @@
 
 ### Chạy laravel
 ```php artisan serve```
-### export file PDF
-```composer require barryvdh/laravel-dompdf```
+
