@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/create', 'StoryController@create')->name('admin.create');
+Route::get('/list', 'StoryController@index')->name('admin.list');

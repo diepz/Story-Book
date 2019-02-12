@@ -14,7 +14,8 @@ class StoryController extends Controller
      */
     public function index()
     {
-        //
+        $story = Story::all();
+        return view('admin.list', $story);
     }
 
     /**
