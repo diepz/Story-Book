@@ -2,41 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoryPost;
 use App\Story;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class StoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $story = Story::all();
+        $story = Story::orderBy('created_at','title')->paginate(5);
         return view('admin.list', compact('story'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $story = Story::all();
         return view('admin.create', compact('story'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoryPost $request)
     {
         $story = new Story();
         $story->title = $request->input('title');
@@ -59,37 +45,19 @@ class StoryController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $story = Story::findOrfail($id);
         return view('admin.edit', compact('story'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(StoryPost $request, $id)
     {
         $story = Story::findOrfail($id);
         $story->title = $request->input('title');
@@ -110,14 +78,10 @@ class StoryController extends Controller
         return redirect()->route('admin.list');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $story = Story::findOrfail($id);
+        $story->delete();
+        return redirect()->route('admin.list');
     }
 }

@@ -24,3 +24,4 @@ Route::post('/create','StoryController@store')->name('admin.store');
 Route::get('/list', 'StoryController@index')->name('admin.list');
 Route::get('/edit/{id}', 'StoryController@edit')->name('admin.edit');
 Route::post('/edit/{id}', 'StoryController@update')->name('admin.update');
+Route::get('/delete/{id}', 'StoryController@destroy')->name('admin.destroy');

@@ -8,13 +8,20 @@
             <label for="title" class="col-md-4 col-form-label text-md-right">Title</label>
             <div class="col-md-6">
                 <input id="name" type="text" class="form-control" name="title" required autofocus>
+                @if($errors ->has('title'))
+                    <p class="help is-danger" style="color:red; ">{{$errors->first('title')}}</p>
+                @endif
             </div>
         </div>
         <div class="form-group row">
             <label for="content" class="col-md-4 col-form-label text-md-right">Content</label>
 
             <div class="col-md-6">
-                <input id="content" type="text" class="form-control" name="content" required>
+                <textarea rows="4" cols="50" id="content" type="text" class="form-control" name="content" required>
+                </textarea>
+                @if($errors ->has('content'))
+                    <p class="help is-danger" style="color:red; ">{{$errors->first('content')}}</p>
+                @endif
             </div>
         </div>
         <div class="form-group row">
@@ -30,8 +37,6 @@
                 </button>
             </div>
         </div>
-
-
     </form>
 
 @endsection
