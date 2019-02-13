@@ -91,19 +91,23 @@ class StoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $story = new Story();
+        $story = Story::findOrfail($id);
         $story->title = $request->input('title');
         $story->content = $request->input('content');
 
         if ($request->hasFile('image')) {
-            $image = $request->image;
-            $path = $image->store('images', 'public');
-            $story->image = $path;
-        }
+            $files = [];
+            foreach ($request->file('image') as $image) {
+//                $image = $request->image;
+                $path = $image->store('image', 'public');
+                array_push($files, $path);
+            }
+            $story->image = $files;
 
+        }
         $story->save();
         Session::flash('succes', 'Cap nhat bai viet thanh cong');
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.list');
     }
 
     /**
