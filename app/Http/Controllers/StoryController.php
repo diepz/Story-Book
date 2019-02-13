@@ -78,8 +78,8 @@ class StoryController extends Controller
      */
     public function edit($id)
     {
-//        $story = Story::findOrfail($id);
-//        return view('admin.edit', compact('story'));
+        $story = Story::findOrfail($id);
+        return view('admin.edit', compact('story'));
     }
 
     /**
@@ -91,19 +91,19 @@ class StoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        $story = new Story();
-//        $story->title = $request->input('title');
-//        $story->content = $request->input('content');
-//
-//        if ($request->hasFile('image')) {
-//            $image = $request->image;
-//            $path = $image->store('images', 'public');
-//            $story->image = $path;
-//        }
-//
-//        $story->save();
-//        Session::flash('succes', 'Cap nhat bai viet thanh cong');
-//        return redirect()->route('admin.index');
+        $story = new Story();
+        $story->title = $request->input('title');
+        $story->content = $request->input('content');
+
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $path = $image->store('images', 'public');
+            $story->image = $path;
+        }
+
+        $story->save();
+        Session::flash('succes', 'Cap nhat bai viet thanh cong');
+        return redirect()->route('admin.index');
     }
 
     /**
@@ -114,6 +114,6 @@ class StoryController extends Controller
      */
     public function destroy($id)
     {
-
+        //
     }
 }
